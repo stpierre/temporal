@@ -1,0 +1,9 @@
+{
+    "CurrVersion": "1.12",
+    "MinCompatibleVersion": "0.1",
+    "Description": "add CHASM keyword search attribute",
+    "SchemaUpdateCqlFiles": [
+      "add_chasm_keyword_search_attribute.sql"
+    ]
+  }
+  

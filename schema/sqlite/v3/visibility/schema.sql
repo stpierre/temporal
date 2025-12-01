@@ -79,6 +79,7 @@ CREATE TABLE executions_visibility (
   TemporalKeyword02       VARCHAR(255)    GENERATED ALWAYS AS (JSON_EXTRACT(search_attributes, "$.TemporalKeyword02")),
   TemporalKeyword03       VARCHAR(255)    GENERATED ALWAYS AS (JSON_EXTRACT(search_attributes, "$.TemporalKeyword03")),
   TemporalKeyword04       VARCHAR(255)    GENERATED ALWAYS AS (JSON_EXTRACT(search_attributes, "$.TemporalKeyword04")),
+  TemporalKeyword05       VARCHAR(255)    GENERATED ALWAYS AS (JSON_EXTRACT(search_attributes, "$.TemporalKeyword05")),
   TemporalKeywordList01   TEXT            GENERATED ALWAYS AS (JSON_EXTRACT(search_attributes, "$.TemporalKeywordList01")) STORED,
   TemporalKeywordList02   TEXT            GENERATED ALWAYS AS (JSON_EXTRACT(search_attributes, "$.TemporalKeywordList02")) STORED,
   
@@ -148,6 +149,7 @@ CREATE INDEX by_temporal_keyword_01  ON executions_visibility (namespace_id, Tem
 CREATE INDEX by_temporal_keyword_02  ON executions_visibility (namespace_id, TemporalKeyword02,  (COALESCE(close_time, '9999-12-31 23:59:59+00:00')) DESC, start_time DESC, run_id);
 CREATE INDEX by_temporal_keyword_03  ON executions_visibility (namespace_id, TemporalKeyword03,  (COALESCE(close_time, '9999-12-31 23:59:59+00:00')) DESC, start_time DESC, run_id);
 CREATE INDEX by_temporal_keyword_04  ON executions_visibility (namespace_id, TemporalKeyword04,  (COALESCE(close_time, '9999-12-31 23:59:59+00:00')) DESC, start_time DESC, run_id);
+CREATE INDEX by_temporal_keyword_05  ON executions_visibility (namespace_id, TemporalKeyword05,  (COALESCE(close_time, '9999-12-31 23:59:59+00:00')) DESC, start_time DESC, run_id);
 
 CREATE VIRTUAL TABLE executions_visibility_fts_text USING fts5 (
   Text01,

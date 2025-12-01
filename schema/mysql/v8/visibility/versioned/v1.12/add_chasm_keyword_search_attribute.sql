@@ -1,0 +1,2 @@
+ALTER TABLE chasm_search_attributes ADD COLUMN TemporalKeyword05 VARCHAR(255) GENERATED ALWAYS AS (search_attributes->>"$.TemporalKeyword05");
+CREATE INDEX by_temporal_keyword_05 ON chasm_search_attributes (namespace_id, TemporalKeyword05);
