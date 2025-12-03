@@ -1,23 +1,19 @@
 package chasm
 
 import (
-	"go.temporal.io/api/serviceerror"
+	"errors"
+
 	"go.temporal.io/server/common/persistence/transitionhistory"
 	"go.temporal.io/server/service/history/consts"
 )
 
-// ErrMalformedComponentRef is returned when the provided component ref cannot be deserialized.
-var ErrMalformedComponentRef = serviceerror.NewInternal("malformed component ref")
-
-// ErrInvalidComponentRef is returned when the provided component ref does not match the target execution.
-var ErrInvalidComponentRef = serviceerror.NewInvalidArgument("invalid component ref")
-
 // ExecutionStateChanged returns true if execution state has advanced beyond the state encoded in
-// refBytes.
+// refBytes. It may return ErrInvalidComponentRef or ErrMalformedComponentRef. Callers should
+// consider converting these to serviceerror.NewInvalidArgument.
 func ExecutionStateChanged(c Component, ctx Context, refBytes []byte) (bool, error) {
 	ref, err := DeserializeComponentRef(refBytes)
 	if err != nil {
-		return false, ErrMalformedComponentRef
+		return false, err
 	}
 	currentRef, err := ctx.structuredRef(c)
 	if err != nil {
