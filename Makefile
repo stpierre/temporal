@@ -348,8 +348,8 @@ proto-codegen:
 	@go generate -run gensearchattributehelpers ./common/searchattribute/...
 
 update-go-api:
-	@printf $(COLOR) "Update go.temporal.io/api@master..."
-	@go get -u go.temporal.io/api@master
+	@printf $(COLOR) "Update go.temporal.io/api@main..."
+	@go get -u go.temporal.io/api@main
 
 ##### Binaries #####
 clean-bins:
